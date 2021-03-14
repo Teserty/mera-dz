@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+
+    <bean id="cat" name="cat" class="com.spring3.zoo.impl.Cat"/>
+    <bean id="dog" name="dog" class="com.spring3.zoo.impl.Dog">
+        <property name="age" value="2"/>
+    </bean>
+
+    <bean name="zoo" class="com.spring3.zoo.Zoo">
+        <constructor-arg index="0" ref="cat"/>
+        <constructor-arg index="1" ref="dog"/>
+        <constructor-arg index="2">
+            <list>
+                <ref bean="cat"/>
+                <ref bean="dog"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean name="service" class="com.spring3.zoo.impl.AnimalAsyncServiceImpl">
+
+    </bean>
+    <bean name="AnimalAspect" class="com.spring3.aspect.AnimalAspect">
+        <property name="asyncService" ref="service"></property>
+    </bean>
+</beans>
